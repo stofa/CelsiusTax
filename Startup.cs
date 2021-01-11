@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace CelsiusTax
 {
@@ -42,6 +43,13 @@ namespace CelsiusTax
             services.AddScoped<IExchangeRateService, ExchangeRateService>();
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<IWalletService, WalletService>();
+
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+                loggingBuilder.AddAzureWebAppDiagnostics();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
