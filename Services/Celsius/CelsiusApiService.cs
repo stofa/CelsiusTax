@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RestSharp;
 
 namespace CelsiusTax.Services.Celsius
@@ -18,16 +19,19 @@ namespace CelsiusTax.Services.Celsius
     public class CelsiusApiService : ICelsiusApiService
     {
         private readonly IConfiguration _configuration;
+        private readonly ILogger<CelsiusApiService> _logger;
 
-        public CelsiusApiService(IConfiguration configuration)
+        public CelsiusApiService(IConfiguration configuration, ILogger<CelsiusApiService> logger)
         {
             _configuration = configuration;
+            _logger = logger;
         }
 
         public IRestResponse GetResultFromCelsiusPrivateApi(string apiKey, string url)
         {
             var client = new RestClient(url) { Timeout = -1 };
             var request = new RestRequest(Method.GET);
+            _logger.LogInformation($"PrivateApiKey:{_configuration["CelsiusApi:PrivateApiKey"]}2asdsdsd324");
             request.AddHeader("X-Cel-Partner-Token", _configuration["CelsiusApi:PrivateApiKey"]);
             request.AddHeader("X-Cel-Api-Key", apiKey);
 
