@@ -2,6 +2,7 @@
 using CelsiusTax.Models.Interests;
 using CelsiusTax.Models.Transaction;
 using CelsiusTax.Services.ExchangeRate;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,13 @@ namespace CelsiusTax.Services.Celsius
 
         private readonly ICelsiusApiService _celsiusApiService;
         private readonly IExchangeRateService _rateService;
+        private readonly ILogger<TransactionService> _logger;
 
-        public TransactionService(ICelsiusApiService celsiusApiService, IExchangeRateService rateService)
+        public TransactionService(ICelsiusApiService celsiusApiService, IExchangeRateService rateService, ILogger<TransactionService> logger)
         {
             _celsiusApiService = celsiusApiService;
             _rateService = rateService;
+            _logger = logger;
         }
 
         public IEnumerable<InterestsPerCoin> GetInterestsForSpecificYear(string apiKey, int year, string fiatCurrencyToCalcValue)
@@ -71,6 +74,8 @@ namespace CelsiusTax.Services.Celsius
         private CelsiusGetTransactionResult GetResults(string apiKey, int page)
         {
             var result = _celsiusApiService.GetResultFromCelsiusPrivateApi(apiKey, $"{Constants.CelsiusApiGetWalletTransactions}?per_page={_pageSizeGetTransaction}& page={page}");
+            _logger.LogInformation(result.ResponseStatus.ToString());
+            _logger.LogInformation(result.StatusDescription.ToString());
             CelsiusGetTransactionResult getTransactionResult = (CelsiusGetTransactionResult)JsonConvert.DeserializeObject(result.Content, typeof(CelsiusGetTransactionResult));
             return getTransactionResult;
         }

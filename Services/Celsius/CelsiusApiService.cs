@@ -28,7 +28,7 @@ namespace CelsiusTax.Services.Celsius
         {
             var client = new RestClient(url) { Timeout = -1 };
             var request = new RestRequest(Method.GET);
-            request.AddHeader("X-Cel-Partner-Token", _configuration["CelsiusApi:PrivateApiKey"]);// ;
+            request.AddHeader("X-Cel-Partner-Token", _configuration["CelsiusApi:PrivateApiKey"]);
             request.AddHeader("X-Cel-Api-Key", apiKey);
 
             return client.Execute(request);
