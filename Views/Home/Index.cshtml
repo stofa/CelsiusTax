@@ -1,0 +1,89 @@
+﻿@model TaxReportViewModel
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Title"];
+}
+
+<div>
+    <h1 class="display-4">@Localizer["Title"]</h1>
+
+    @if (Model.InterestsPerCoin.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td class="font-weight-bold">@Localizer["Coin"]</td>
+                    <td class="text-right font-weight-bold">@Localizer["InterestsInUsd"]</td>
+                    @if (Model.SelectedCurrency != Constants.UsdCurrency)
+                    {
+                        <td class="text-right font-weight-bold">@Localizer["InterestsInCurrency"] @Model.SelectedCurrency</td>
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InterestsPerCoin.OrderBy(c => c.UsdValue))
+                {
+                    <tr>
+                        <td class="text-left">@item.Coin</td>
+                        <td class="text-right">@($"{item.UsdValue:N}")</td>
+                        @if (Model.SelectedCurrency != Constants.UsdCurrency)
+                        {
+                            <td class="text-right">@($"{item.ValueInSelectedFiat:N}")</td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td class="text-right font-weight-bold">@($"{Constants.UsdCurrency} {Model.InterestsPerCoin.Sum(c=>c.UsdValue):N}")</td>
+                    @if (Model.SelectedCurrency != Constants.UsdCurrency)
+                    {
+                        <td class="text-right font-weight-bold">@($"{Model.SelectedCurrency} {Model.InterestsPerCoin.Sum(c=>c.ValueInSelectedFiat):N}")</td>
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        @using (Html.BeginForm())
+        {
+            <div class="w-50">
+                <div class="form-group">
+                    <label for="taxYear">@Localizer["TaxYear"]</label>
+                    <select id="taxYear" name="taxYear" class="form-control">
+                        @{ var currentYear = DateTime.Now.Year; }
+                        @for (int i = 3; i > 0; i--)
+                        {
+                            var selected = currentYear == DateTime.Now.Year - 1 ? "selected" : string.Empty;
+                            @:<option @selected>@currentYear</option>
+
+                            currentYear = currentYear - 1;
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fiatCurrency">@Localizer["Currency"]</label>
+                    <select id="fiatCurrency" name="fiatCurrency" class="form-control">
+
+                        @foreach (var currency in Model.AvailableCurrencies)
+                        {
+                            @:<option>@currency</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">@Localizer["CelsiusApiKey"]</label>
+                    <input type="text" class="form-control" id="apiKey" name="apiKey" aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
+                    <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]</small>
+                </div>
+                <button type="submit" class="btn btn-primary">@Localizer["GenerateReport"]</button>
+            </div>
+        }
+    }
+</div>
