@@ -74,9 +74,6 @@ namespace CelsiusTax.Services.Celsius
         private CelsiusGetTransactionResult GetResults(string apiKey, int page)
         {
             var result = _celsiusApiService.GetResultFromCelsiusPrivateApi(apiKey, $"{Constants.CelsiusApiGetWalletTransactions}?per_page={_pageSizeGetTransaction}& page={page}");
-            _logger.LogInformation(result.Content.ToString());
-            _logger.LogInformation(result.ResponseStatus.ToString());
-            _logger.LogInformation(result.StatusDescription.ToString());
             CelsiusGetTransactionResult getTransactionResult = (CelsiusGetTransactionResult)JsonConvert.DeserializeObject(result.Content, typeof(CelsiusGetTransactionResult));
             return getTransactionResult;
         }
