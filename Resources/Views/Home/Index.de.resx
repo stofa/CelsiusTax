@@ -141,10 +141,16 @@
   <data name="KeyPrivacy" xml:space="preserve">
     <value>Wir speichern und geben deinen API Key nicht weiter</value>
   </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Du kannst diese App verwenden, wenn du die Zinsen von Celsius als Einkommen versteuern musst. Pro Coin / Währung siehst du wie viel Zinsen zu erhalten hast. Die Zinsen werden per entsprechendem Stichtag zu diesem Tageskurs in deine Währung umgerechnet.</value>
+  </data>
   <data name="TaxYear" xml:space="preserve">
     <value>Steuerjahr</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Celsius Zins Report</value>
+    <value>Celsius Zins Auswertung</value>
+  </data>
+  <data name="UnexcpectedError" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten. Stelle sicher, dass der API Key korrekt ist und die Abfrage der Transaktionen zugelassen ist. Du kannst mich hier kontaktiere:</value>
   </data>
 </root>

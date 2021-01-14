@@ -141,10 +141,17 @@
   <data name="KeyPrivacy" xml:space="preserve">
     <value>We'll never store or share your API key.</value>
   </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>You can use this app if you need to pay income tax on your Celsius rewards. For each coin / currency you can see how much rewards you got. The reward will be converted into your currency on the corresponding date at this daily rate. </value>
+    <comment>Du kannst diese App verwenden, wenn du die Zinsen von Celsius als Einkommen versteuern musst. Pro Coin / Währung siehst du wie viel Zinsen zu erhalten hast. Die Zinsen werden per entsprechendem Stichtag zu diesem Tageskurs in deine Währung umgerechnet.</comment>
+  </data>
   <data name="TaxYear" xml:space="preserve">
     <value>Tax year</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Celsius Interests report</value>
+  </data>
+  <data name="UnexcpectedError" xml:space="preserve">
+    <value>An unexpected error ocurred. Make sure the API key is correct and the rights to read transactions is set. You can contact me here: </value>
   </data>
 </root>

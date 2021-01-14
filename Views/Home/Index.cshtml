@@ -20,7 +20,7 @@
                     {
                         <td class="text-right font-weight-bold">@Localizer["InterestsInCurrency"] @Model.SelectedCurrency</td>
                     }
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +53,10 @@
     {
         @using (Html.BeginForm())
         {
-            <div class="w-50">
+            <div class="EnterDataFormContainer">
+                <p class="alert alert-secondary">
+                    @Localizer["Remarks"]
+                </p>
                 <div class="form-group">
                     <label for="taxYear">@Localizer["TaxYear"]</label>
                     <select id="taxYear" name="taxYear" class="form-control">
@@ -62,6 +65,7 @@
                         {
                             var selected = currentYear == DateTime.Now.Year - 1 ? "selected" : string.Empty;
                             @:<option @selected>@currentYear</option>
+
 
                             currentYear = currentYear - 1;
                         }
@@ -73,15 +77,20 @@
 
                         @foreach (var currency in Model.AvailableCurrencies)
                         {
-                            @:<option>@currency</option>
+                            var selected = currency == Model.SelectedCurrency ? "selected" : string.Empty;
+                            @:<option @selected>@currency</option>
                         }
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="apiKey">@Localizer["CelsiusApiKey"]</label>
-                    <input type="text" class="form-control" id="apiKey" name="apiKey" aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
+                    <input type="text" class="form-control" id="apiKey" name="apiKey" required aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
                     <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]</small>
                 </div>
+                @if (ViewBag.ExceptionOcurred != null)
+                {
+                    <p class="badge-danger p-3">@Localizer["UnexcpectedError"] <a href="https://t.me/fabu1" target="_blank">Fä bu</a></p>
+                }
                 <button type="submit" class="btn btn-primary">@Localizer["GenerateReport"]</button>
             </div>
         }

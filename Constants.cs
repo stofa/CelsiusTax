@@ -25,5 +25,10 @@ namespace CelsiusTax
 
         public const string CelTicker = "CEL";
         public const string UsdCurrency = "USD";
+        public const string ChfCurrency = "CHF";
+        public const string EurCurrency = "EUR";
+        public const string ChCulture = "-ch";
+        public const string DeCulture = "de";
+        public const string FrCulture = "fr";
     }
 }

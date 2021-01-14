@@ -28,16 +28,54 @@ namespace CelsiusTax.Controllers
 
         public IActionResult Index(string apiKey, int taxYear, string fiatCurrency)
         {
-            TaxReportViewModel model = new TaxReportViewModel();
-
-            model.AvailableCurrencies = _exchangeRateService.GetAvailableFiatCurrencies().OrderBy(c => c);
-            model.SelectedCurrency = fiatCurrency;
-            model.TaxYear = taxYear;
+            TaxReportViewModel model = new TaxReportViewModel
+            {
+                AvailableCurrencies = _exchangeRateService.GetAvailableFiatCurrencies().OrderBy(c => c),
+                SelectedCurrency = GetFiatCurrency(fiatCurrency),
+                TaxYear = taxYear
+            };
 
             if (!string.IsNullOrEmpty(apiKey))
-                model.InterestsPerCoin = _transactionService.GetInterestsForSpecificYear(apiKey, taxYear, fiatCurrency);
+            {
+                try
+                {
+                    model.InterestsPerCoin = _transactionService.GetInterestsForSpecificYear(apiKey, taxYear, fiatCurrency);
+                }
+                catch (Exception)
+                {
+                    ViewBag.ExceptionOcurred = true;
+                    return View(model);
+                }
+            }
 
             return View(model);
+        }
+
+        private static string GetFiatCurrency(string fiatCurrency)
+        {
+            if (string.IsNullOrEmpty(fiatCurrency))
+            {
+                fiatCurrency = Constants.UsdCurrency;
+
+                var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
+                if (currentCulture.Name.ToLower().Contains(Constants.ChCulture))
+                    fiatCurrency = Constants.ChfCurrency;
+                else
+                {
+                    switch (currentCulture.TwoLetterISOLanguageName.ToLower())
+                    {
+                        case Constants.DeCulture:
+                        case Constants.FrCulture:
+                            fiatCurrency = Constants.EurCurrency;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+            }
+            return fiatCurrency;
         }
 
         public IActionResult Privacy()
