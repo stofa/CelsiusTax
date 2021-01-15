@@ -67,6 +67,12 @@
                             @:<option @selected>@currentYear</option>
 
 
+
+
+
+
+
+
                             currentYear = currentYear - 1;
                         }
                     </select>
@@ -83,7 +89,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="apiKey">@Localizer["CelsiusApiKey"]</label>
+                    <label for="apiKey">@Localizer["CelsiusApiKey"]</label><button type="button" class="btn btn-outline-secondary ml-2 pl-1 pr-1 p-0" data-toggle="modal" data-target="#helpApiKey">
+                        ?
+                    </button>
                     <input type="text" class="form-control" id="apiKey" name="apiKey" required aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
                     <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]</small>
                 </div>
@@ -92,6 +100,30 @@
                     <p class="badge-danger p-3">@Localizer["UnexcpectedError"] <a href="https://t.me/fabu1" target="_blank">Fä bu</a></p>
                 }
                 <button type="submit" class="btn btn-primary">@Localizer["GenerateReport"]</button>
+            </div>
+
+
+            <div class="modal fade" id="helpApiKey" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">@Localizer["ApiHelpTitle"]</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>@Localizer["GotoProfile"]</p>
+                            <img src="~/img/screen_profile.png" class="w-100" alt="Goto Api" />
+                            <p>@Localizer["GenerateApiKey"]</p>
+                            <img src="~/img/screen1api.png" class="w-100" alt="Generate API Key" />
+                            <p>@Localizer["UseTheApiKey"]</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
     }

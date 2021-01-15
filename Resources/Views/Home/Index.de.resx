@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApiHelpTitle" xml:space="preserve">
+    <value>Wie kann ich einen API Key erstellen?</value>
+  </data>
   <data name="CelsiusApiKey" xml:space="preserve">
     <value>Celsius API Key</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schliessen</value>
   </data>
   <data name="Coin" xml:space="preserve">
     <value>Coin / Währung</value>
@@ -129,8 +135,14 @@
   <data name="EnterApiKey" xml:space="preserve">
     <value>Celsius API Key (z.B. 5sbaa32c-225a-3244-dsd4-86476dfsb218)</value>
   </data>
+  <data name="GenerateApiKey" xml:space="preserve">
+    <value>Generiere den API Key. Du musst mindestens "Read Transactions" zulassen.</value>
+  </data>
   <data name="GenerateReport" xml:space="preserve">
     <value>Erstelle Report</value>
+  </data>
+  <data name="GotoProfile" xml:space="preserve">
+    <value>Gehe zu deiner Profil Seite oben rechts.</value>
   </data>
   <data name="InterestsInCurrency" xml:space="preserve">
     <value>Zinsen in</value>
@@ -152,5 +164,8 @@
   </data>
   <data name="UnexcpectedError" xml:space="preserve">
     <value>Ein unerwarteter Fehler ist aufgetreten. Stelle sicher, dass der API Key korrekt ist und die Abfrage der Transaktionen zugelassen ist. Du kannst mich hier kontaktiere:</value>
+  </data>
+  <data name="UseTheApiKey" xml:space="preserve">
+    <value>Verwende den generierten API Key um den Report zu laden. Du kannst den Key dannach löschen.</value>
   </data>
 </root>

@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApiHelpTitle" xml:space="preserve">
+    <value>How can I generate an API key?</value>
+  </data>
   <data name="CelsiusApiKey" xml:space="preserve">
     <value>Celsius API key</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="Coin" xml:space="preserve">
     <value>Coin / Currency</value>
@@ -128,6 +134,9 @@
   </data>
   <data name="EnterApiKey" xml:space="preserve">
     <value>Enter your Celsius API key (e.g. 5sbaa32c-225a-3244-dsd4-86476dfsb218)</value>
+  </data>
+  <data name="GenerateApiKey" xml:space="preserve">
+    <value>Generate the API key. You have to at least to read transactions.</value>
   </data>
   <data name="GenerateReport" xml:space="preserve">
     <value>Generate report</value>
@@ -153,5 +162,8 @@
   </data>
   <data name="UnexcpectedError" xml:space="preserve">
     <value>An unexpected error ocurred. Make sure the API key is correct and the rights to read transactions is set. You can contact me here: </value>
+  </data>
+  <data name="UseTheApiKey" xml:space="preserve">
+    <value>Use the generated API key to generate your report. You can delete the key after you used it.</value>
   </data>
 </root>
