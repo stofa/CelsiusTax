@@ -151,13 +151,13 @@
     <value>Zinsen in USD</value>
   </data>
   <data name="KeyPrivacy" xml:space="preserve">
-    <value>Wir speichern und geben deinen API Key nicht weiter</value>
+    <value>Wir speichern und geben deinen API Key nicht weiter. Du kannst den Code der Applikation hier einsehen:</value>
   </data>
   <data name="Remarks" xml:space="preserve">
     <value>Du kannst diese App verwenden, wenn du die Zinsen von Celsius als Einkommen versteuern musst. Pro Coin / Währung siehst du wie viel Zinsen zu erhalten hast. Die Zinsen werden per entsprechendem Stichtag zu diesem Tageskurs in deine Währung umgerechnet.</value>
   </data>
   <data name="TaxNotes" xml:space="preserve">
-    <value>Diese Auswertung wurde für das Jahr {0} erstellt.</value>
+    <value>Diese Auswertung wurde für das folgende Jahr erstellt:</value>
   </data>
   <data name="TaxYear" xml:space="preserve">
     <value>Steuerjahr</value>

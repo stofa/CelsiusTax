@@ -11,7 +11,7 @@
 
     @if (Model.InterestsPerCoin.Any())
     {
-        <p>@String.Format(Localizer["TaxNotes",Model.TaxYear])</p>
+        <p>@Localizer["TaxNotes"] @Model.TaxYear</p>
         <table class="table">
             <thead>
                 <tr>
@@ -87,7 +87,7 @@
                         ?
                     </button>
                     <input type="text" class="form-control" id="apiKey" name="apiKey" required aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
-                    <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]</small>
+                    <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]  <a href="https://github.com/stofa/CelsiusTax" target="_blank">GitHub</a></small>
                 </div>
                 @if (ViewBag.ExceptionOcurred != null)
                 {
