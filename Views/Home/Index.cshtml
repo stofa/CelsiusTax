@@ -11,6 +11,7 @@
 
     @if (Model.InterestsPerCoin.Any())
     {
+        <p>@String.Format(Localizer["TaxNotes",Model.TaxYear])</p>
         <table class="table">
             <thead>
                 <tr>
@@ -65,13 +66,6 @@
                         {
                             var selected = currentYear == DateTime.Now.Year - 1 ? "selected" : string.Empty;
                             @:<option @selected>@currentYear</option>
-
-
-
-
-
-
-
 
                             currentYear = currentYear - 1;
                         }
