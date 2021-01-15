@@ -32,4 +32,9 @@ jobs:
         app-name: 'celtax'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a1326afcc3ee4017a81d9ccdacc7b0da }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        package: ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Cloudflare Purge Cache
+  # You may pin to the exact commit or the version.
+  # uses: jakejarvis/cloudflare-purge-action@eee6dba0236093358f25bb1581bd615dc8b3d8e3
+      uses: jakejarvis/cloudflare-purge-action@v0.3.0
