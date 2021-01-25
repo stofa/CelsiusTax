@@ -154,6 +154,9 @@
     <value>You can use this app if you need to pay income tax on your Celsius rewards. For each coin / currency you can see how much rewards you got. The reward will be converted into your currency on the corresponding date at this daily rate. </value>
     <comment>Du kannst diese App verwenden, wenn du die Zinsen von Celsius als Einkommen versteuern musst. Pro Coin / Währung siehst du wie viel Zinsen zu erhalten hast. Die Zinsen werden per entsprechendem Stichtag zu diesem Tageskurs in deine Währung umgerechnet.</comment>
   </data>
+  <data name="SeeExample" xml:space="preserve">
+    <value>This is how the result looks like:</value>
+  </data>
   <data name="TaxNotes" xml:space="preserve">
     <value>This report was generated for the tax year:</value>
   </data>

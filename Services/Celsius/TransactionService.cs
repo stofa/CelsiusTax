@@ -63,7 +63,7 @@ namespace CelsiusTax.Services.Celsius
 
             transactionInSpecificYear.AddRange(getTransactionResult.record.Where(r => r.time.Year == year));
 
-            for (int i = 2; i < getTransactionResult.pagination.pages; i++)
+            for (int i = 2; i < getTransactionResult.pagination.pages + 1; i++)
             {
                 transactionInSpecificYear.AddRange(GetResults(apiKey, i).record.Where(r => r.time.Year == year));
             }
@@ -73,9 +73,8 @@ namespace CelsiusTax.Services.Celsius
 
         private CelsiusGetTransactionResult GetResults(string apiKey, int page)
         {
-            var result = _celsiusApiService.GetResultFromCelsiusPrivateApi(apiKey, $"{Constants.CelsiusApiGetWalletTransactions}?per_page={_pageSizeGetTransaction}& page={page}");
-            CelsiusGetTransactionResult getTransactionResult = (CelsiusGetTransactionResult)JsonConvert.DeserializeObject(result.Content, typeof(CelsiusGetTransactionResult));
-            return getTransactionResult;
+            var result = _celsiusApiService.GetResultFromCelsiusPrivateApi(apiKey, $"{Constants.CelsiusApiGetWalletTransactions}?per_page={_pageSizeGetTransaction}&page={page}");
+            return (CelsiusGetTransactionResult)JsonConvert.DeserializeObject(result.Content, typeof(CelsiusGetTransactionResult));
         }
     }
 }

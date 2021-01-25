@@ -68,10 +68,3 @@ body {
   width: 100%;
   margin:20px 0;
 }
-
-@media (min-width: 768px) {
-    .EnterDataFormContainer{
-        width:50%;
-    }
-}
-
