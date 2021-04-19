@@ -132,6 +132,12 @@
   <data name="Currency" xml:space="preserve">
     <value>Währung</value>
   </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>Bis</value>
+  </data>
   <data name="EnterApiKey" xml:space="preserve">
     <value>Celsius API Key (z.B. 5sbaa32c-225a-3244-dsd4-86476dfsb218)</value>
   </data>
@@ -160,7 +166,7 @@
     <value>So sieht das Resultat aus:</value>
   </data>
   <data name="TaxNotes" xml:space="preserve">
-    <value>Diese Auswertung wurde für das folgende Jahr erstellt:</value>
+    <value>Diese Auswertung wurde für die folgende Zeitperiode erstellt:</value>
   </data>
   <data name="TaxYear" xml:space="preserve">
     <value>Steuerjahr</value>

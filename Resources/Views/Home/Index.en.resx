@@ -132,6 +132,12 @@
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
   </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>To</value>
+  </data>
   <data name="EnterApiKey" xml:space="preserve">
     <value>Enter your Celsius API key (e.g. 5sbaa32c-225a-3244-dsd4-86476dfsb218)</value>
   </data>

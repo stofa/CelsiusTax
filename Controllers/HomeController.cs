@@ -26,22 +26,29 @@ namespace CelsiusTax.Controllers
             _exchangeRateService = exchangeRateService;
         }
 
-        public IActionResult Index(string apiKey, int taxYear, string fiatCurrency)
+        public IActionResult Index(string apiKey, DateTime? from, DateTime? to, string fiatCurrency)
         {
+            if(!from.HasValue && !to.HasValue)
+            {
+                from = new DateTime(DateTime.Now.Year - 1, 1, 1);
+                to = new DateTime(DateTime.Now.Year - 1, 12, 31);
+            }
+
             TaxReportViewModel model = new TaxReportViewModel
             {
                 AvailableCurrencies = _exchangeRateService.GetAvailableFiatCurrencies().OrderBy(c => c),
                 SelectedCurrency = GetFiatCurrency(fiatCurrency),
-                TaxYear = taxYear
+                From = from.Value,
+                To = to.Value
             };
 
-            if (!string.IsNullOrEmpty(apiKey))
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(fiatCurrency))
             {
                 try
                 {
-                    model.InterestsPerCoin = _transactionService.GetInterestsForSpecificYear(apiKey, taxYear, fiatCurrency);
+                    model.InterestsPerCoin = _transactionService.GetInterestsForSpecificTimeframe(apiKey, from.Value, to.Value, fiatCurrency);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     ViewBag.ExceptionOcurred = true;
                     return View(model);

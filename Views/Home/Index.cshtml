@@ -11,7 +11,7 @@
 
     @if (Model.InterestsPerCoin.Any())
     {
-        <p>@Localizer["TaxNotes"] @Model.TaxYear</p>
+        <p>@Localizer["TaxNotes"] @Model.From.ToShortDateString() - @Model.To.ToShortDateString()</p>
         <table class="table">
             <thead>
                 <tr>
@@ -54,57 +54,57 @@
     {
         @using (Html.BeginForm())
         {
-<div class="row">
-    <div class="col">
-        <p class="alert alert-secondary">
-            @Localizer["Remarks"]
-        </p>
+            <div class="row">
+                <div class="col">
+                    <p class="alert alert-secondary">
+                        @Localizer["Remarks"]
+                    </p>
 
-        <div class="form-group">
-            <label for="taxYear">@Localizer["TaxYear"]</label>
-            <select id="taxYear" name="taxYear" class="form-control">
-                @{ var currentYear = DateTime.Now.Year; }
-                @for (int i = 3; i > 0; i--)
-                {
-                    var selected = currentYear == DateTime.Now.Year - 1 ? "selected" : string.Empty;
-                    @:<option @selected>@currentYear</option>
-                    currentYear = currentYear - 1;
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="fiatCurrency">@Localizer["Currency"]</label>
-            <select id="fiatCurrency" name="fiatCurrency" class="form-control">
+                    <div class="form-group">
+                        <div class="d-inline-block">
+                            <label for="taxYear">@Localizer["DateFrom"]</label>
+                            @Html.TextBoxFor(m => m.From, "{0:d}", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.From)
+                        </div>
+                        <div class="ml-4 d-inline-block">
+                            <label for="taxYear">@Localizer["DateTo"]</label>
+                            @Html.TextBoxFor(m => m.To, "{0:d}", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.To)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fiatCurrency">@Localizer["Currency"]</label>
+                        <select id="fiatCurrency" name="fiatCurrency" class="form-control">
 
-                @foreach (var currency in Model.AvailableCurrencies)
-                {
-                    var selected = currency == Model.SelectedCurrency ? "selected" : string.Empty;
-                    @:<option @selected>@currency</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="apiKey">@Localizer["CelsiusApiKey"]</label><button type="button" class="btn btn-outline-secondary ml-2 pl-1 pr-1 p-0" data-toggle="modal" data-target="#helpApiKey">
-                ?
-            </button>
-            <input type="text" class="form-control" id="apiKey" name="apiKey" required aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
-            <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]  <a href="https://github.com/stofa/CelsiusTax" target="_blank">GitHub</a></small>
-        </div>
-        @if (ViewBag.ExceptionOcurred != null)
-        {
-            <p class="badge-danger p-3">@Localizer["UnexcpectedError"] <a href="https://t.me/fabu1" target="_blank">Fä bu</a></p>
-        }
-        <button type="submit" class="btn btn-primary">@Localizer["GenerateReport"]</button>
+                            @foreach (var currency in Model.AvailableCurrencies)
+                            {
+                                var selected = currency == Model.SelectedCurrency ? "selected" : string.Empty;
+                                @:<option @selected>@currency</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">@Localizer["CelsiusApiKey"]</label><button type="button" class="btn btn-outline-secondary ml-2 pl-1 pr-1 p-0" data-toggle="modal" data-target="#helpApiKey">
+                            ?
+                        </button>
+                        <input type="text" class="form-control" id="apiKey" name="apiKey" required aria-describedby="apiKeyHelp" placeholder="@Localizer["EnterApiKey"]" value="">
+                        <small id="apiKeyHelp" class="form-text text-muted">@Localizer["KeyPrivacy"]  <a href="https://github.com/stofa/CelsiusTax" target="_blank">GitHub</a></small>
+                    </div>
+                    @if (ViewBag.ExceptionOcurred != null)
+                    {
+                        <p class="badge-danger p-3">@Localizer["UnexcpectedError"] <a href="https://t.me/fabu1" target="_blank">Fä bu</a></p>
+                    }
+                    <button type="submit" class="btn btn-primary">@Localizer["GenerateReport"]</button>
 
-    </div>
-    <div class="w-100 d-md-none mt-5"></div>
-    <div class="col">
-        <p class="alert alert-secondary">
-            @Localizer["SeeExample"]
-            <img src="@(Url.Content($"~/img/celtax_{System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower()}.gif"))" class="w-100" />
-        </p>
-    </div>
-</div>
+                </div>
+                <div class="w-100 d-md-none mt-5"></div>
+                <div class="col">
+                    <p class="alert alert-secondary">
+                        @Localizer["SeeExample"]
+                        <img src="@(Url.Content($"~/img/celtax_{System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower()}.gif"))" class="w-100" />
+                    </p>
+                </div>
+            </div>
 
             <div class="modal fade" id="helpApiKey" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">

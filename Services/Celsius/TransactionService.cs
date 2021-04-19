@@ -15,8 +15,8 @@ namespace CelsiusTax.Services.Celsius
 
     public interface ITransactionService
     {
-        List<CelsiusTransactionModel> GetTransactionsForSpecificYear(string apiKey, int year);
-        IEnumerable<InterestsPerCoin> GetInterestsForSpecificYear(string apiKey, int year, string fiatCurrencyToCalcValue);
+        List<CelsiusTransactionModel> GetTransactionsForSpecificTimeframe(string apiKey, DateTime from, DateTime to);
+        IEnumerable<InterestsPerCoin> GetInterestsForSpecificTimeframe(string apiKey, DateTime from, DateTime to, string fiatCurrencyToCalcValue);
     }
 
     public class TransactionService : ITransactionService
@@ -36,9 +36,9 @@ namespace CelsiusTax.Services.Celsius
             _logger = logger;
         }
 
-        public IEnumerable<InterestsPerCoin> GetInterestsForSpecificYear(string apiKey, int year, string fiatCurrencyToCalcValue)
+        public IEnumerable<InterestsPerCoin> GetInterestsForSpecificTimeframe(string apiKey, DateTime from, DateTime to, string fiatCurrencyToCalcValue)
         {
-            IEnumerable<CelsiusTransactionModel> transactionsPerYear = GetTransactionsForSpecificYear(apiKey, year)
+            IEnumerable<CelsiusTransactionModel> transactionsPerYear = GetTransactionsForSpecificTimeframe(apiKey, from, to)
                 .Where(t => t.nature == CelsiusTransactionNatureInterests && t.state == CelsiusTransactionStateConfirmed);
 
             List<InterestsPerCoin> interestsByCoin = new List<InterestsPerCoin>();
@@ -56,19 +56,19 @@ namespace CelsiusTax.Services.Celsius
             return interestsByCoin.Where(i => i.UsdValue > new decimal(0.01));
         }
 
-        public List<CelsiusTransactionModel> GetTransactionsForSpecificYear(string apiKey, int year)
+        public List<CelsiusTransactionModel> GetTransactionsForSpecificTimeframe(string apiKey, DateTime from, DateTime to)
         {
-            List<CelsiusTransactionModel> transactionInSpecificYear = new List<CelsiusTransactionModel>();
+            List<CelsiusTransactionModel> transactionInSpecificTimeFrame = new List<CelsiusTransactionModel>();
             CelsiusGetTransactionResult getTransactionResult = GetResults(apiKey, 1);
 
-            transactionInSpecificYear.AddRange(getTransactionResult.record.Where(r => r.time.Year == year));
+            transactionInSpecificTimeFrame.AddRange(getTransactionResult.record.Where(r => r.time >= from && r.time <= to));
 
             for (int i = 2; i < getTransactionResult.pagination.pages + 1; i++)
             {
-                transactionInSpecificYear.AddRange(GetResults(apiKey, i).record.Where(r => r.time.Year == year));
+                transactionInSpecificTimeFrame.AddRange(GetResults(apiKey, i).record.Where(r => r.time >= from && r.time <= to));
             }
 
-            return transactionInSpecificYear;
+            return transactionInSpecificTimeFrame;
         }
 
         private CelsiusGetTransactionResult GetResults(string apiKey, int page)

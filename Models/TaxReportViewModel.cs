@@ -1,6 +1,7 @@
 ﻿using CelsiusTax.Models.Interests;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,10 @@ namespace CelsiusTax.Models
         public IEnumerable<string> AvailableCurrencies { get; set; }
 
         public IEnumerable<InterestsPerCoin> InterestsPerCoin { get; set; }
-        public int TaxYear { get; internal set; }
+        [Required]
+        public DateTime From { get; set; }
+        [Required]
+        public DateTime To { get; set; }
         public string SelectedCurrency { get; internal set; }
     }   
 }

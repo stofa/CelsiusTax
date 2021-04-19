@@ -17,11 +17,11 @@ namespace CelsiusTax
         public static string CelsiusTop100Url => $"{CelsiusPublicApiRootUrl}/community/top100";
 
 
-        public const string ExchangeRateApiRootUrl = "https://api.exchangeratesapi.io";
+        public const string ExchangeRateApiRootUrl = "https://api.exchangerate.host";
         public static string ExchangeRateAvailableCurrencies => $"{ExchangeRateApiRootUrl}/latest?base=USD";
 
         public static string ExchangeRateLatestToUsd => $"{ExchangeRateApiRootUrl}/latest?base=USD&symbols={{0}}";
-        public static string ExchangeHistoryYearToUsd => $"{ExchangeRateApiRootUrl}/history?start_at={{0}}-01-01&end_at={{0}}-12-31&base=USD&symbols={{1}}";
+        public static string ExchangeHistoryYearToUsd => $"{ExchangeRateApiRootUrl}/timeseries?start_date={{0}}-01-01&end_date={{0}}-12-31&base=USD&symbols={{1}}";
 
         public const string CelTicker = "CEL";
         public const string UsdCurrency = "USD";
