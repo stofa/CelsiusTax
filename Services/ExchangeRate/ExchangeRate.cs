@@ -84,13 +84,14 @@ namespace CelsiusTax.Services.ExchangeRate
 
             IRestResponse response = GetResponseFromApi(String.Format(Constants.ExchangeHistoryYearToUsd, year, fiatSymbol));
             List<HistoricalExchangeRate> result = new List<HistoricalExchangeRate>();
-            dynamic rates = JsonConvert.DeserializeObject(response.Content);
+            dynamic rates = JsonConvert.DeserializeObject(response.Content, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 
             lock (_cacheLockHistoricalrates)
             {
                 foreach (var rate in rates["rates"])
                 {
-                    _cacheHistoricalRates.Add(new HistoricalExchangeRate() { Date = Convert.ToDateTime(rate.Name), ExchangeRate = rate.Value[fiatSymbol], FiatSymbol = fiatSymbol });
+                    if (rate.Value[fiatSymbol] != null)
+                        _cacheHistoricalRates.Add(new HistoricalExchangeRate() { Date = Convert.ToDateTime(rate.Name), ExchangeRate = rate.Value[fiatSymbol], FiatSymbol = fiatSymbol });
                 }
             }
         }
